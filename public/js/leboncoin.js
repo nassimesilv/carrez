@@ -4,6 +4,12 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
+function cleanData(text){
+  text.replace(/(\r\n|\n|\r)/gm,"");
+  text=text.trim();
+  return text;
+}
+
 app.get('/scrape', function(req, res){
   var title;
     url = 'https://www.leboncoin.fr/ventes_immobilieres/1076257949.htm?ca=12_s';
@@ -11,32 +17,29 @@ app.get('/scrape', function(req, res){
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
-            var price, city, type,surface;
             var json = { price : "", city : "", type : "", surface:""};
 
             $('.item_price.clearfix').filter(function(){
                 var data = $(this);
-                price = data.attr('content');
-                json.price = price;
+                json.price = data.attr('content');
             })
 
             // get data
             $('.properties.lineNegative').find('div.line > h2 > span.value').each(function(i, elm) {
-                //console.log($(this).text());
-                if($(this).prev().text()=="Type de bien"){
-                    json.type=$(this).text();
+                var data=$(this);
+                var prop=data.prev();
+                if(prop.text()=="Type de bien"){
+                    json.type=data.text();
                 }
-                else if ($(this).prev().children().first().text()=="Ville") {
-                  json.city=$(this).text();
-                  console.log(json.city=$(this).text());
+                else if (prop.children().first().text()=="Ville") {
+                  json.city=cleanData(data.text());
                 }
-                else if ($(this).prev().text()=="Surface") {
-                  json.surface=$(this).text();
+                else if (prop.text()=="Surface") {
+                  json.surface=data.text();
                 }
-
             });
 
-            fs.writeFile('json\\leboncoin.json', JSON.stringify(json, null, 4), function(err){
+            fs.writeFile('..\\json\\leboncoin.json', JSON.stringify(json, null, 4), function(err){
                 res.send('File successfully written! - Check your project directory for the output.json file');
             })
         }
