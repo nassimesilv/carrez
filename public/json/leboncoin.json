@@ -1,6 +1,12 @@
 {
+<<<<<<< HEAD
     "price": "665000",
     "city": "Bois-Colombes 92270",
     "type": "Appartement",
+=======
+    "price": "918000",
+    "city": "Courbevoie 92400",
+    "type": "Maison",
+>>>>>>> ae80471d42271ffd55e7f993de10b7352c57ca0d
     "surface": "110 m2"
 }

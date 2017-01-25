@@ -39,7 +39,13 @@ module.exports = {getMA : function(){
                 json.meanPriceHouse=cleanData($(this).find('div.small-4.medium-2.columns.prices-summary__cell--median').text());
                 json.highPriceHouse=cleanData($(this).find('div:nth-child(4)').text());
             })
+<<<<<<< HEAD
             fs.writeFile('json\\meilleursagent.json', JSON.stringify(json, null, 6))
+=======
+            fs.writeFile('..\\json\\meilleursagents.json', JSON.stringify(json, null, 6), function(err){
+                res.send('File successfully written! - Check your project directory for the output.json file');
+            })
+>>>>>>> ae80471d42271ffd55e7f993de10b7352c57ca0d
         }
     })
 }
