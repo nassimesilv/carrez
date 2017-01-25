@@ -13,8 +13,4 @@ connect().use(serveStatic(__dirname)).listen(3000, function(){
 
 });
 
-/*app.post('/compute', function(req, res) {
-    var url = req.body.lien;
-});*/
-
 leboncoin.compute("https://www.leboncoin.fr/ventes_immobilieres/1081123462.htm?ca=12_s")
