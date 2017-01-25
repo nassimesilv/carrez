@@ -2,13 +2,17 @@ var express = require('express');
 var fs      = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var app     = express();
 
-app.get('/scrape', function(req, res){
-  var title;
-    url = 'https://www.leboncoin.fr/ventes_immobilieres/1076257949.htm?ca=12_s';
 
-    request(url, function(error, response, html){
+function cleanData(text){
+  text.replace(/(\r\n|\n|\r)/gm,"");
+  text=text.trim();
+  return text;
+}
+
+
+module.exports = {compute :function(url){
+request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
             var price, city, type,surface;
@@ -27,8 +31,7 @@ app.get('/scrape', function(req, res){
                     json.type=$(this).text();
                 }
                 else if ($(this).prev().children().first().text()=="Ville") {
-                  json.city=$(this).text();
-                  console.log(json.city=$(this).text());
+                  json.city=cleanData($(this).text());
                 }
                 else if ($(this).prev().text()=="Surface") {
                   json.surface=$(this).text();
@@ -36,16 +39,12 @@ app.get('/scrape', function(req, res){
 
             });
 
-            fs.writeFile('json\\leboncoin.json', JSON.stringify(json, null, 4), function(err){
-                res.send('File successfully written! - Check your project directory for the output.json file');
-            })
+            fs.writeFile('json\\leboncoin.json', JSON.stringify(json, null, 4))
         }
     })
 
-})
+}
+}
 
-app.listen('8082')
 
 console.log('Everything is possible with us nigga');
-
-exports = module.exports = app;
