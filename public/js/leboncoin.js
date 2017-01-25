@@ -11,6 +11,8 @@ function cleanData(text){
 }
 
 
+
+
 module.exports = {compute :function(url){
 request(url, function(error, response, html){
         if(!error){

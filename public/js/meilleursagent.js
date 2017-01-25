@@ -10,9 +10,16 @@ function cleanData(text){
   return text;
 }
 
-app.get('/scrapeMA', function(req, res){
-  var title;
-    url = 'https://www.meilleursagents.com/prix-immobilier/chalons-en-champagne-51000/';
+function formatCity(text){
+  text.replace(/ /gm,"-");
+  text=text.trim();
+  return text;
+}
+
+
+module.exports = {getMA : function(){
+
+  'https://www.meilleursagents.com/prix-immobilier/'+formatCity(city);
 
     request(url, function(error, response, html){
         if(!error){
@@ -32,14 +39,12 @@ app.get('/scrapeMA', function(req, res){
                 json.meanPriceHouse=cleanData($(this).find('div.small-4.medium-2.columns.prices-summary__cell--median').text());
                 json.highPriceHouse=cleanData($(this).find('div:nth-child(4)').text());
             })
-            fs.writeFile('json\\meilleursagents.json', JSON.stringify(json, null, 6), function(err){
-                res.send('File successfully written! - Check your project directory for the output.json file');
-            })
+            fs.writeFile('json\\meilleursagent.json', JSON.stringify(json, null, 6))
         }
     })
-})
+}
+}
 
-app.listen('8082')
 
 console.log('Everything is possible with us nigga');
 
