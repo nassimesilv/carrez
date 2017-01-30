@@ -11,8 +11,9 @@ function cleanData(text){
 }
 
 
-module.exports = {compute :function(url){
-request(url, function(error, response, html){
+module.exports = {
+  compute :function(url){
+      request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
             var data,parent;
@@ -21,7 +22,6 @@ request(url, function(error, response, html){
                 data=$(this);
                 json.price = data.attr('content');
             })
-
 
             $('.properties.lineNegative').find('div.line > h2 > span.value').each(function(i, elm) {
               data=$(this);
@@ -41,8 +41,7 @@ request(url, function(error, response, html){
             fs.writeFile('json\\leboncoin.json', JSON.stringify(json, null, 4))
         }
     })
-
-}
+  }
 }
 
 
