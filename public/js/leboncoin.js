@@ -37,8 +37,8 @@ module.exports = {
               }
 
             });
-
             fs.writeFile('json\\leboncoin.json', JSON.stringify(json, null, 4))
+
         }
     })
   }
