@@ -7,12 +7,15 @@ var cheerio = require('cheerio');
 function cleanData(text){
   text.replace(/(\r\n|\n|\r)/gm,"");
   text=text.trim();
+  text=text.toLowerCase();
   return text.split(' ').join('-');
 }
 
 
+
 module.exports = {
-  compute :function(url){
+
+  compute:function(url,callback){
       request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
@@ -38,11 +41,11 @@ module.exports = {
 
             });
             fs.writeFile('json\\leboncoin.json', JSON.stringify(json, null, 4))
-
+            callback(JSON.stringify(json, null, 4));
         }
     })
   }
 }
 
 
-console.log('Everything is possible with us nigga');
+console.log('Everything is possible with LEBONCOIN nigga');

@@ -13,26 +13,22 @@ app.use("/css",  express.static(__dirname + '/css'));
 app.get('/', function (req, res) {
       res.sendFile(__dirname + '/index.html');
 });
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 app.use(bodyParser.json());
 
-app.post("/", function (req, res) {
+app.post("/compute", function (req, res) {
     var link=req.body.lien;
-    var values;
-    leboncoin.compute(link);
-    fs.readFile('json\\leboncoin.json', 'utf8', function (err, data) {
-        values = JSON.parse(data);
-        console.log(values.type);
-        console.log(values.price);
-        console.log(values.city);
-        console.log(values.surface);
+
+    leboncoin.compute(link, function(data){
+        var jsonBC = JSON.parse(data);
+        meilleursagents.getMA(jsonBC.city,jsonBC.type,function(data){
+            var jsonMA = JSON.parse(data);
+        });
     });
+
     res.sendFile(__dirname + '/index.html');
-    console.log(values); // WTF??
 });
 
 
