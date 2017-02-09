@@ -1,19 +1,15 @@
-var express = require('express');
-var request = require('request');
-var app     = express();
 
+var leboncoin = require('./js/leboncoin');
+var meilleursagents = require('./js/meilleursagent');
 
-
-var button = document.querySelector('#compute');
+var button = document.querySelector('#submit');
 
 button.addEventListener('click', function onClick () {
-  app.post('/compute', function(req, res) {
-      var url = document.getElementById('#lien').value;
-      res.send(url);
-  });
+    var link=document.querySelector('#lien').value;
+    leboncoin.compute(link, function(data){
+        var jsonBC = JSON.parse(data);
+        meilleursagents.getMA(jsonBC.city,jsonBC.type,function(data){
+            var jsonMA = JSON.parse(data);
+        });
+    });
 }
-
-app.get('/compute', function(req, res) {
-  var url = req.body.url;
-
-});

@@ -18,9 +18,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.post("/compute", function (req, res) {
+app.post("/", function (req, res) {
     var link=req.body.lien;
-
     leboncoin.compute(link, function(data){
         var jsonBC = JSON.parse(data);
         meilleursagents.getMA(jsonBC.city,jsonBC.type,function(data){
@@ -30,7 +29,6 @@ app.post("/compute", function (req, res) {
 
     res.sendFile(__dirname + '/index.html');
 });
-
 
 app.listen(8000);
 console.log("Every thing is possible with our server nigga");

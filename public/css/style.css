@@ -1,0 +1,119 @@
+body {
+    background: url(https://pcbx.us/bexy.jpg);
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-align: center;
+    width: 600px;
+    margin: 17% auto;
+}
+
+.header {
+    color: #c9d0d4;
+    font-family: 'Sansita',cursive;
+    font-size: 45px;
+    line-height: 50px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    margin-top: 40px;
+    text-align: center;
+    text-shadow: 0 1px 1px #fff;
+    border-bottom: double #555;
+}
+
+.description{
+    color: #c9d0d4;
+    font-family: 'Oxygen',cursive;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+
+#result {
+    width: 700px;
+    letter-spacing: 1px;
+    color: #bbc3c8;
+    background: #292929;
+    font-family: 'Georgia',cursive;
+    font-style: oblique; font-size: 18px;
+    line-height: 30px;
+    margin-left: 15px;
+    margin-top: 20px;
+    position: absolute;
+    display:inline-block;
+}
+
+#icon {
+    display: inline-block;
+    width: 35px;
+    height: 40px;
+    background-color: #d45d7d;
+    padding: 10px 10px 0px 5px;
+    margin-left: 15px;
+    -webkit-border-radius: 8px 0px 0px 8px;
+    -moz-border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
+    -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+    border: solid 0px #cbc9c9;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+}
+
+
+#lien {
+    height: 44px;
+    border: none;
+    width: 75%;
+    background: #FDFCFB;
+    font-family: inherit;
+    color: #737373;
+    letter-spacing: 1px;
+    text-indent: 5%;
+    border-radius: 0;
+}
+
+
+#submit {
+    border: none;
+    width: 25%;
+    height: 44px;
+    font-size: 14px;
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 0 8px 8px 0;
+    background-color: #d45d7d;
+    -webkit-box-shadow: 0 3px rgba(232, 108, 141,.75);
+    -moz-box-shadow: 0 3px rgba(232, 108, 141,.75);
+    box-shadow: 0 3px rgba(232, 108, 141,.75);
+    transition: all 0.1s linear 0s;
+    top: 0px;
+    position: relative;
+}
+
+
+#submit:hover {
+    background: #a7536a;
+    cursor: pointer;
+    top: 3px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+
+input:focus {
+    outline: none;
+    outline: 2px solid #E86C8D;
+    box-shadow: 0 0 2px #E86C8D;
+}
