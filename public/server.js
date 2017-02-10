@@ -35,7 +35,6 @@ app.post("/", function (req, res) {
             else{
                 result="Best price :"+jsonMA.lowPrice+" € 	 Mean price : "+jsonMA.meanPrice+" €  	    Worst Price : "+jsonMA.highPrice+" €.";
                 var pricePerM2=(jsonBC.price/jsonBC.surface).toFixed(2);
-                console.log(pricePerM2);
                 percent = (((pricePerM2 - jsonMA.meanPrice)/(jsonMA.meanPrice))*100).toFixed(2);
                 if(jsonMA.meanPrice <= pricePerM2){
                     if(percent<15){
