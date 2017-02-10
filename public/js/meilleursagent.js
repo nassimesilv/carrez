@@ -7,6 +7,7 @@ var app     = express();
 function cleanData(text){
   text.replace(/(\r\n|\n|\r)/gm,"");
   text=text.trim();
+  text=text.replace(/\D+/g, '');
   return text;
 }
 

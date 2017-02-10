@@ -8,7 +8,7 @@ function cleanData(text){
   text.replace(/(\r\n|\n|\r)/gm,"");
   text=text.trim();
   text=text.toLowerCase();
-  text = text.replace(/[èéêë]/g,"e"); 
+  text = text.replace(/[èéêë]/g,"e");
   return text.split(' ').join('-');
 }
 
@@ -37,7 +37,10 @@ module.exports = {
                 json.city=cleanData(data.text());
               }
               else if (parent.text()=="Surface") {
-                json.surface=data.text();
+                var text=data.text();
+                text=text.replace(/\D+/g, '');
+                text = text.substring(0, text.length - 1);
+                json.surface=text;
               }
 
             });

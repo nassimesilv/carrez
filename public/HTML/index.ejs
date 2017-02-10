@@ -12,11 +12,12 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Oxygen">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Karla">
   </head>
+  <body>
     <div class="header">
-         <p>Comparateur de bien immobilier</p>
+         <p>Comparator of property</p>
    </div>
     <div class="description">
-         <p>Pensez-vous avoir trouvé la maison de vos rêves? Vérifier le maintenant avec Nassim & Company!</p>
+         <p>Do you think you have found the house of your dreams? Check it now with Nassim & Company!</p>
     </div>
     <form action="/" method="post" class="input">
         <label id="icon"><img src="..\css\cabin.png"/></label>
@@ -24,8 +25,21 @@
         <input type="submit" id="submit" value="Comparer">
     </form>
     <div id="result">
-        <p id="result_text"> Best price : 234 567 € 	&nbsp; &nbsp;	 Mean price : 350 000 €  	&nbsp;	&nbsp;		    Worst Price : 432 098 € <br> You house is 23% cheaper than the mean price, you can find better.  </p>
-        <label id="result_icon"><img src="..\css\happy.png"/></label>
+        <p>
+            <span id="result_text"><%= result_text %> </span><br>
+            <span id="result_values"><%= result_values %></span>
+        </p>
+        <label id="result_icon">
+            <%if ( yes_no == "good") { %>
+                <img src="..\css\happy.png"/>
+            <% } %>
+            <%if ( yes_no == "no good") { %>
+                <img src="..\css\student.png"/>
+            <% } %>
+            <%if ( yes_no == "error") { %>
+                <img src="..\css\warning.png"/>
+            <% } %>
+        </label>
     </div>
   </body>
 </html>
