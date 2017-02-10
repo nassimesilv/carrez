@@ -28,22 +28,28 @@ app.post("/", function (req, res) {
             var percent;
             var result,result_values;
             var yes_no;
-            var pricePerM2=jsonBC.price/jsonBC.surface;
             if(jsonMA.lowPrice==null || jsonMA.lowPrice==""){
-                result="We cannot compute for your proprety. We handle houses and apartment only.";
+                result="We cannot compute the estimate for your proprety. We handle houses and apartment only.";
                 yes_no="error";
             }
             else{
-                percent = (((jsonMA.meanPrice-pricePerM2)/(pricePerM2))*100).toFixed(2);
                 result="Best price :"+jsonMA.lowPrice+" € 	 Mean price : "+jsonMA.meanPrice+" €  	    Worst Price : "+jsonMA.highPrice+" €.";
-                if(percent<15 && percent>-15){
-                  result_values=" Your house is "+ percent +" % further than the mean price, you can buy this one!";
-                  yes_no="good";
+                var pricePerM2=(jsonBC.price/jsonBC.surface).toFixed(2);
+                console.log(pricePerM2);
+                percent = (((pricePerM2 - jsonMA.meanPrice)/(jsonMA.meanPrice))*100).toFixed(2);
+                if(jsonMA.meanPrice <= pricePerM2){
+                    if(percent<15){
+                      result_values=" Your house is "+ percent +" % greater than the mean price, you can buy this one!";
+                      yes_no="good";
+                    }
+                    else{
+                      result_values=" Your house is "+ percent +" % greater than the mean price, you can have a better one.";
+                      yes_no="no good";
+                    }
                 }
                 else{
-                  percent = (((pricePerM2 - jsonMA.meanPrice)/(jsonMA.meanPrice))*100).toFixed(2);
-                  result_values=" Your house is "+ percent +" % further than the mean price, you can have a better one.";
-                  yes_no="no good";
+                    result_values=" Your house is "+ percent +" % lower than the mean price, you can definitely buy this one!";
+                    yes_no="good";
                 }
             }
             res.render(__dirname + '/HTML/index',{result_text:result,yes_no:yes_no,result_values:result_values});
