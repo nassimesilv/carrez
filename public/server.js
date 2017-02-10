@@ -48,7 +48,7 @@ app.post("/", function (req, res) {
                     }
                 }
                 else{
-                    result_values=" Your house is "+ percent +" % lower than the mean price, you can definitely buy this one!";
+                    result_values=" Your house is "+ -percent +" % lower than the mean price, you can definitely buy this one!";
                     yes_no="good";
                 }
             }
